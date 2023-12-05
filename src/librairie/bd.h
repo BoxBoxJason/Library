@@ -4,8 +4,11 @@
 
 class BD : public Livre
 {
+
 public:
     BD();
+private:
+    QString dessinateur;
 };
 
 #endif // BD_H

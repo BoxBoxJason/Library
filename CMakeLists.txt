@@ -26,6 +26,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/librairies/adherent.h src/librairies/adherent.cpp
         src/librairies/livres.h src/librairies/livres.cpp
         src/librairies/bd.h src/librairies/bd.cpp
+        src/librairie/bibliotheque.h src/librairie/bibliotheque.cpp
+        src/librairie/recueil.h src/librairie/recueil.cpp
+        src/librairie/roman.h src/librairie/roman.cpp
+        src/librairie/theatre.h src/librairie/theatre.cpp
+        src/librairie/album.h src/librairie/album.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Library APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
