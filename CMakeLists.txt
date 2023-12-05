@@ -22,6 +22,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Library
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        src/controllers/createdatabase.h src/controllers/createdatabase.cpp
+        src/librairies/adherent.h src/librairies/adherent.cpp
+        src/librairies/livres.h src/librairies/livres.cpp
+        src/librairies/bd.h src/librairies/bd.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Library APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
