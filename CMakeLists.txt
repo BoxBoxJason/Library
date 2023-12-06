@@ -22,10 +22,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Library
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        src/controllers/createdatabase.h src/controllers/createdatabase.cpp
-        src/librairies/adherent.h src/librairies/adherent.cpp
-        src/librairies/livres.h src/librairies/livres.cpp
-        src/librairies/bd.h src/librairies/bd.cpp
+        src/librairie/adherent.h src/librairie/adherent.cpp
+        src/librairie/livre.h src/librairie/livre.cpp
+        src/librairie/bd.h src/librairie/bd.cpp
         src/librairie/bibliotheque.h src/librairie/bibliotheque.cpp
         src/librairie/recueil.h src/librairie/recueil.cpp
         src/librairie/roman.h src/librairie/roman.cpp
