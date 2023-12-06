@@ -2,7 +2,7 @@
 #define BIBLIOTHEQUE_H
 #include <QString>
 #include <QHash>
-#include <QList>
+#include <QSet>
 #include "livre.h"
 
 class Bibliotheque
@@ -49,12 +49,13 @@ public:
     bool acheterLivre(int isbn);
 
 private:
+
     QString nom;
     QString adresse;
     int code;
     QHash<int,Livre*> livres;
     static int compteur;
-    static QList<Bibliotheque*> liste;
+    static QSet<Bibliotheque*> liste;
     static bool checkNomExiste(const QString& nom);
     static bool checkAdresseExiste(const QString& adresse);
 };

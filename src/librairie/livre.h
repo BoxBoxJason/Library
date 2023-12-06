@@ -2,7 +2,7 @@
 #define LIVRE_H
 
 #include <QString>
-#include <QList>
+#include <QHash>
 
 class Livre
 {
@@ -24,6 +24,15 @@ public:
      * \return Statut de succès de l'opération (False si échec).
      */
     bool setEtat(const QString& etat);
+    /*!
+     * \brief getLivre Renvoie un pointeur vers le livre demandé.
+     * Si le livre n'existe pas, renvoie nullptr.
+     * \param code
+     * \return Pointeur vers le livre demandé.
+     */
+    static Livre* getLivreFromCode(int code);
+    static QSet<Livre*> getLivresFromISBN(int isbn);
+
 protected:
     int code;
     QString auteur;
@@ -33,7 +42,9 @@ protected:
     QString public_cible;
     QString etat;
     static int compteur;
-    static QList<Livre*> liste_livres;
+    static QHash<int,Livre*> liste;
+    static QHash<int,Livre*>* getListe(){return &liste;}
+
 };
 
 #endif // LIVRE_H

@@ -6,7 +6,9 @@
 class Recueil : public Livre
 {
 public:
-    Recueil();
+    explicit Recueil(const QString& auteur, const QString& titre, const QString& editeur, int isbn, const QString& public_cible,const QString& indicateur);
+    QString getIndicateur();
+
 private:
     QString indicateur;
 };

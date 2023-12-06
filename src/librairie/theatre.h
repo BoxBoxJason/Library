@@ -9,7 +9,6 @@ public:
     Theatre();
 private:
     int siecle;
-
 };
 
 #endif // THEATRE_H

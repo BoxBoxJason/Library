@@ -1,7 +1,7 @@
 #include "bibliotheque.h"
 
 int Bibliotheque::compteur = 0;
-QList<Bibliotheque*> Bibliotheque::liste;
+QSet<Bibliotheque*> Bibliotheque::liste;
 
 Bibliotheque::Bibliotheque(const QString& nom, const QString& adresse){
     for (Bibliotheque* bibliotheque : Bibliotheque::liste){
@@ -10,7 +10,7 @@ Bibliotheque::Bibliotheque(const QString& nom, const QString& adresse){
     this->nom = nom;
     this->adresse = adresse;
     code = compteur++;
-    Bibliotheque::liste.push_front(this);
+    Bibliotheque::liste.insert(this);
 }
 
 void Bibliotheque::afficherLivres(){} // TODO
