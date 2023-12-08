@@ -6,9 +6,16 @@
 class Roman : public Livre
 {
 public:
-    Roman();
+    Roman(const QString& auteur, const QString& titre, const QString& editeur, int isbn, const QString& public_cible,const QString& genre,int code_bibliotheque_origine=-1);
+
+    QString getGenre();
+
+    QSet<Roman*> getRomansFromGenre(const QString& genre);
+
 private:
     QString genre;
+    static QHash<int,Roman*> liste;
+    static QHash<int,Roman*>* getListe();
 };
 
 #endif // ROMAN_H

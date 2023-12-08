@@ -38,6 +38,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/interface/navigation/pagesnavigationwidget.h src/interface/navigation/pagesnavigationwidget.cpp
         src/interface/resources/resources.qrc
         src/interface/librairie/booktradewidget.h src/interface/librairie/booktradewidget.cpp
+        src/exceptions/notuniqueelementexception.h src/exceptions/notuniqueelementexception.cpp
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Library APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

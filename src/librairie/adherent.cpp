@@ -1,30 +1,38 @@
 #include "adherent.h"
-
+#include "../exceptions/notuniqueelementexception.h"
 int Adherent::max_emprunts= 10;
 int Adherent::compteur = 0;
 QSet<Adherent*> Adherent::liste;
 
-Adherent::Adherent(const QString& nom,const QString& prenom, const QString& adresse) {
-    if (Adherent::checkNomPrenomExiste(nom,prenom)) throw ;
-    this->nom = nom;
-    this->prenom = prenom;
-    this->adresse = adresse;
-    numero = compteur++;
+Adherent::Adherent(const QString& nom,const QString& prenom, const QString& adresse)
+    : nom(nom) , prenom(prenom) , adresse(adresse), numero(Adherent::compteur++){
+    if (Adherent::checkNomPrenomExiste(nom,prenom)) throw NotUniqueElementException("L'adhérent " + nom + " " + prenom + " est déjà enregistré.");
     Adherent::liste.insert(this);
 }
 
 
-bool Adherent::emprunterLivre(int code){
-    bool success = true;
-    // TODO
+Adherent::~Adherent(){
+    for (Livre* livre : livres){
+        livre->setDisponibilite(true);
+    }
+}
+
+
+bool Adherent::emprunterLivre(int code) {
+    bool success = false;
+    if (livres.count() < Adherent::max_emprunts){
+        success = true;
+        Livre* livre = Livre::getExemplaireFromCode(code);
+        livre->setDisponibilite(false);
+        livres.insert(livre);
+    }
     return success;
 }
 
 
-bool Adherent::rendreLivre(int code){
-    bool success = true;
-    // TODO
-    return success;
+void Adherent::rendreLivre(Livre* livre){
+    livre->setDisponibilite(true);
+    livres.remove(livre);
 }
 
 
