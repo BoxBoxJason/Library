@@ -1,13 +1,12 @@
-#include "mainwindow.h"
+#include "interface/librairie.h"
 
 #include <QApplication>
-#include <>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    Librairie librairie_window;
+    librairie_window.show();
     return a.exec();
 }

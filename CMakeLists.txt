@@ -14,18 +14,32 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         src/main.cpp
-        src/interface/mainwindow.cpp
-        src/interface/mainwindow.h
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Library
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        src/controllers/createdatabase.h src/controllers/createdatabase.cpp
-        src/librairies/adherent.h src/librairies/adherent.cpp
-        src/librairies/livres.h src/librairies/livres.cpp
-        src/librairies/bd.h src/librairies/bd.cpp
+        src/librairie/adherent.h src/librairie/adherent.cpp
+        src/librairie/livre.h src/librairie/livre.cpp
+        src/librairie/bd.h src/librairie/bd.cpp
+        src/librairie/bibliotheque.h src/librairie/bibliotheque.cpp
+        src/librairie/recueil.h src/librairie/recueil.cpp
+        src/librairie/roman.h src/librairie/roman.cpp
+        src/librairie/theatre.h src/librairie/theatre.cpp
+        src/librairie/album.h src/librairie/album.cpp
+        src/interface/librairie.h src/interface/librairie.cpp
+        src/interface/navigation/navigationtopbar.h src/interface/navigation/navigationtopbar.cpp
+        src/interface/adherent/adherentwidget.h src/interface/adherent/adherentwidget.cpp
+        src/interface/librairie/librarywidget.h src/interface/librairie/librarywidget.cpp
+        src/interface/livre/bookwidget.h src/interface/livre/bookwidget.cpp
+        src/interface/navigation/pagesnavigationwidget.h src/interface/navigation/pagesnavigationwidget.cpp
+        src/interface/resources/resources.qrc
+        src/interface/librairie/booktradewidget.h src/interface/librairie/booktradewidget.cpp
+        src/exceptions/notuniqueelementexception.h src/exceptions/notuniqueelementexception.cpp
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Library APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
