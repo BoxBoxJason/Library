@@ -2,14 +2,17 @@
 
 
 int Livre::compteur = 0;
-QHash<int,Livre*> Livre::liste;
+QHash<long long,Livre*> Livre::liste;
 
 
-Livre::Livre(const QString& auteur, const QString& titre, const QString& editeur, int isbn, const QString& public_cible, int code_bibliotheque)
+Livre::Livre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible, int code_bibliotheque)
     : auteur(auteur), titre(titre),editeur(editeur), isbn(isbn), public_cible(public_cible), code_bibliotheque_origine(code_bibliotheque){
     if (code_bibliotheque > -1){
         code = compteur++;
         getListe()->insert(code,this);
+    }
+    else {
+        code = -1;
     }
 }
 
@@ -26,7 +29,7 @@ bool Livre::getDisponibilite(){return disponibilite;}
 Livre* Livre::getExemplaireFromCode(int code){return liste.value(code,nullptr);}
 
 
-Livre* Livre::getLivreFromISBN(int isbn){
+Livre* Livre::getLivreFromISBN(long long isbn){
     Livre* result = nullptr;
     for (Livre* livre : Livre::liste){
         if (livre->code_bibliotheque_origine < 0 && livre->isbn == isbn){
@@ -37,7 +40,7 @@ Livre* Livre::getLivreFromISBN(int isbn){
     return result;
 }
 
-QSet<Livre*> Livre::getExemplairesFromISBN(int isbn){
+QSet<Livre*> Livre::getExemplairesFromISBN(long long isbn){
     QSet<Livre*> result;
     for (Livre* livre : Livre::liste){
         if (livre->code_bibliotheque_origine > -1 && livre->isbn == isbn){

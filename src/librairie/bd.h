@@ -7,7 +7,7 @@ class BD : public Livre
 {
 
 public:
-    BD(const QString& auteur, const QString& titre, const QString& editeur, int isbn, const QString& public_cible,const QString& dessinateur,int code_bibliotheque_origine=-1);
+    BD(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& dessinateur,int code_bibliotheque_origine=-1);
 
     QString getDessinateur();
 

@@ -6,7 +6,7 @@
 class Theatre : public Livre
 {
 public:
-    Theatre(const QString& auteur, const QString& titre, const QString& editeur, int isbn, const QString& public_cible,int siecle,int code_bibliotheque_origine=-1);
+    Theatre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,int siecle,int code_bibliotheque_origine=-1);
 
     int getSiecle();
 

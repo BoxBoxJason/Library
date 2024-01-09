@@ -30,7 +30,7 @@ QSet<Livre*> Bibliotheque::obtenirLivres(const QString& categorie){
 }
 
 
-Livre* Bibliotheque::emprunterLivre(Bibliotheque* bibliotheque, int isbn){
+Livre* Bibliotheque::emprunterLivre(Bibliotheque* bibliotheque, long long isbn){
     Livre * livre = nullptr;
     // Choisir un exemplaire du livre dans la bibliothèque
     QSet<Livre*> exemplaires_disponibles = Livre::filtrerLivresDisponibles(bibliotheque->getExemplairesFromISBN(isbn));
@@ -49,7 +49,7 @@ Livre* Bibliotheque::emprunterLivre(Bibliotheque* bibliotheque, int isbn){
 
 bool Bibliotheque::setNom(const QString& nom){if (! Bibliotheque::checkNomExiste(nom)) this->nom = nom;}
 bool Bibliotheque::setAdresse(const QString& adresse){if (! Bibliotheque::checkAdresseExiste(adresse)) this->adresse = adresse;}
-bool Bibliotheque::acheterLivre(int isbn){} // TODO
+bool Bibliotheque::acheterLivre(long long isbn){} // TODO
 
 bool Bibliotheque::checkNomExiste(const QString& nom){
     bool existe = false;
@@ -75,7 +75,7 @@ bool Bibliotheque::checkAdresseExiste(const QString& adresse){
 }
 
 
-QSet<Livre*> Bibliotheque::getExemplairesFromISBN(int isbn){
+QSet<Livre*> Bibliotheque::getExemplairesFromISBN(long long isbn){
     QSet<Livre*> result;
     for (Livre* livre : livres){
         if (livre->getCode() > -1 && livre->getISBN() == isbn){

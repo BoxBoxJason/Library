@@ -11,12 +11,12 @@ class Bibliotheque
 public:
     explicit Bibliotheque(const QString& nom, const QString& adresse);
     /*!
-     * \brief afficherLivres Affiche tous les livres possédés par la bibliothèque.
+     * \brief obtenirrLivres Affiche tous les livres possédés par la bibliothèque.
      * Tous les livres sont affichés, qu'ils soient disponibles ou non.
      */
     QSet<Livre*> obtenirLivres();
     /*!
-     * \brief afficherLivres Affiche tous les livres de la catégorie possédés par la bibliothèque.
+     * \brief obtenirLivres Affiche tous les livres de la catégorie possédés par la bibliothèque.
      * Tous les livres sont affichés, qu'ils soient disponibles ou non.
      * \param categorie Catégorie de livre. Si elle est inconnue, alors rien ne se passera.
      */
@@ -27,7 +27,7 @@ public:
      * \param isbn Code ISBN du livre.
      * \return Pointeur vers le livre.
      */
-    Livre* emprunterLivre(Bibliotheque* bibliotheque, int isbn);
+    Livre* emprunterLivre(Bibliotheque* bibliotheque, long long isbn);
     /*!
      * \brief setNom Change l'attribut nom de la bibliothèque.
      * Attention, rien ne se passe si on essaie de donner un nom qui existe déjà.
@@ -47,7 +47,8 @@ public:
      * \param isbn
      * \return
      */
-    bool acheterLivre(int isbn);
+
+    bool acheterLivre(long long isbn);
 
 private:
     // Nom (unique) de la bibliothèque.
@@ -58,7 +59,12 @@ private:
     int code;
     // Hashmap des codes:livres de la bibliothèque (contient aussi ceux prêtés à adhérents).
     QHash<int,Livre*> livres;
-    QSet<Livre*> getExemplairesFromISBN(int isbn);
+    /*!
+     * \brief getExemplairesFromISBN Renvoie tous les exemplaires associés à l'isbn par un livre.
+     * \param isbn
+     * \return Set des exemplaires correspond à l'isbn d'un livre.
+     */
+    QSet<Livre*> getExemplairesFromISBN(long long isbn);
     // Compteur d'instances, utilisé pour attribuer un code unique à une bibliothèque.
     static int compteur;
     // Hashmap des codes:Bibliothèques existantes.
