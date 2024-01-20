@@ -2,6 +2,7 @@
 #define BIBLIOTHEQUE_H
 
 #include <QString>
+#include <QStringList>
 #include <QHash>
 #include <QSet>
 #include "livre.h"
@@ -46,9 +47,30 @@ public:
      * \brief acheterLivre Ajoute un livre à la collection de la bibliothèque.
      * \param isbn
      * \return
-     */
-
+     */    
     bool acheterLivre(long long isbn);
+    /*!
+     * \brief getNom
+     * \return Renvoie le nom de la bibliothèque
+     */
+    QString getNom();
+    /*!
+     * \brief getInformations
+     * \return Renvoie les informations de la bibliothèque sous forme de liste
+     */
+    QStringList getInformations() const {
+        QStringList infos;
+        infos.append("Nom: " + nom);
+        infos.append("Adresse: " + adresse);
+        infos.append("Code: " + QString::number(code));
+        return infos;
+    };
+    friend std::ostream& operator<<(std::ostream& os, const Bibliotheque& obj) {
+        os << obj.getInformations().join("\n").toStdString() << "\n";
+        return os;
+    }
+    static QSet<Bibliotheque*> getBibliotheques();
+
 
 private:
     // Nom (unique) de la bibliothèque.

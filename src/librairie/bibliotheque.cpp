@@ -3,6 +3,15 @@
 int Bibliotheque::compteur = 0;
 QHash<int,Bibliotheque*> Bibliotheque::liste;
 
+QSet<Bibliotheque*> Bibliotheque::getBibliotheques(){
+    QSet<Bibliotheque*> biblios;
+    for (Bibliotheque* bibliotheque : Bibliotheque::liste) {
+        biblios.insert(bibliotheque);
+    }
+    return biblios;
+}
+
+
 Bibliotheque::Bibliotheque(const QString& nom, const QString& adresse)
     : livres(), nom(nom), adresse(adresse), code(Bibliotheque::compteur++){
     for (Bibliotheque* bibliotheque : Bibliotheque::liste){
@@ -83,4 +92,8 @@ QSet<Livre*> Bibliotheque::getExemplairesFromISBN(long long isbn){
         }
     }
     return result;
+}
+
+QString Bibliotheque::getNom(){
+    return nom;
 }

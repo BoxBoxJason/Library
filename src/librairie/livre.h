@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QString>
+#include <QStringList>
 #include <QHash>
 #include <QSet>
 
@@ -35,12 +36,17 @@ public:
 
     static QSet<Livre*> filtrerLivresDisponibles(const QSet<Livre*>& livres);
 
+    QStringList getInformations() const {
+        QStringList infos;
+        infos.append("Livre: " + titre);
+        infos.append("Auteur: " + auteur);
+        infos.append("Code: " + QString::number(code));
+        infos.append("ISBN" + QString::number(isbn));
+        infos.append("Disponible: " + QString(disponibilite ? "oui" : "non"));
+        return infos;
+    };
     friend std::ostream& operator<<(std::ostream& os, const Livre& obj) {
-        os << "Livre:  " << obj.titre.toStdString();
-        os << "\nAuteur: " << obj.auteur.toStdString();
-        os << "\nCode: " << obj.code;
-        os << "\nISBN: " << obj.isbn;
-        os << "\nDisponible: " << (obj.disponibilite ? "oui" : "non") << "\n";
+        os << obj.getInformations().join("\n").toStdString() << "\n";
         return os;
     }
 

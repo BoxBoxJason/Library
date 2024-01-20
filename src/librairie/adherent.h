@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QSet>
+#include <QStringList>
 #include "bibliotheque.h"
 #include "livre.h"
 
@@ -33,6 +34,22 @@ public:
      * \param bibliotheque
      */
     void setBibliotheque(Bibliotheque* bibliotheque);
+    /*!
+     * \brief getInformations
+     * \return Renvoie les informations du profil de l'adhérent (pour affichage)
+     */
+    QStringList getInformations() const {
+        QStringList infos;
+        infos.append("Numéro adhérent: " + QString::number(numero));
+        infos.append("Nom: " + prenom + " " + nom);
+        infos.append("Adresse: " + adresse);
+        infos.append("Bibliothèque: " + bibliotheque->getNom());
+        return infos;
+    };
+    friend std::ostream& operator<<(std::ostream& os, const Adherent& obj) {
+        os << obj.getInformations().join("\n").toStdString() << "\n";
+        return os;
+    };
 
 private:
     QString nom;
