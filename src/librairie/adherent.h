@@ -18,6 +18,7 @@ public:
      * \return Statut de succès de l'emprunt (False si échec).
      */
     ~Adherent();
+    QString getFullname();
     bool emprunterLivre(int code);
     /*!
      * \brief rendreLivre Rend un livre à sa bibliothèque.
@@ -35,6 +36,11 @@ public:
      */
     void setBibliotheque(Bibliotheque* bibliotheque);
     /*!
+     * \brief getAdherents Renvoie la liste de tous les adhérents.
+     * \return
+     */
+    static QSet<Adherent*> getAdherents();
+    /*!
      * \brief getInformations
      * \return Renvoie les informations du profil de l'adhérent (pour affichage)
      */
@@ -43,7 +49,12 @@ public:
         infos.append("Numéro adhérent: " + QString::number(numero));
         infos.append("Nom: " + prenom + " " + nom);
         infos.append("Adresse: " + adresse);
-        infos.append("Bibliothèque: " + bibliotheque->getNom());
+        if (bibliotheque != nullptr){
+            infos.append("Bibliothèque: " + bibliotheque->getNom());
+        }
+        else {
+            infos.append("Bibliothèque: Aucune");
+        }
         return infos;
     };
     friend std::ostream& operator<<(std::ostream& os, const Adherent& obj) {

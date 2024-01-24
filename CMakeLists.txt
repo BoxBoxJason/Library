@@ -30,15 +30,16 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/librairie/roman.h src/librairie/roman.cpp
         src/librairie/theatre.h src/librairie/theatre.cpp
         src/librairie/album.h src/librairie/album.cpp
-        src/interface/librairie.h src/interface/librairie.cpp
-        src/interface/navigation/navigationtopbar.h src/interface/navigation/navigationtopbar.cpp
         src/interface/adherent/adherentwidget.h src/interface/adherent/adherentwidget.cpp
         src/interface/librairie/librarywidget.h src/interface/librairie/librarywidget.cpp
         src/interface/livre/bookwidget.h src/interface/livre/bookwidget.cpp
         src/interface/navigation/pagesnavigationwidget.h src/interface/navigation/pagesnavigationwidget.cpp
         src/interface/resources/resources.qrc
-        src/interface/librairie/booktradewidget.h src/interface/librairie/booktradewidget.cpp
         src/exceptions/notuniqueelementexception.h src/exceptions/notuniqueelementexception.cpp
+        src/interface/library.h src/interface/library.cpp
+        src/interface/librairie/libraryview.h src/interface/librairie/libraryview.cpp
+        src/interface/adherent/adherentview.h src/interface/adherent/adherentview.cpp
+        src/interface/livre/bookview.h src/interface/livre/bookview.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

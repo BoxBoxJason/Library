@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QTextBrowser>
+#include <QStackedLayout>
+#include <QComboBox>
+#include <QHash>
+#include "adherentview.h"
 #include "../../librairie/adherent.h"
 
 class AdherentWidget : public QWidget
@@ -14,8 +18,11 @@ public:
     void clean();
 
 private:
-    Adherent* adherent;
-    QTextBrowser* affichage;
+    QStackedLayout* stacked_layout;
+    QComboBox* choix_adherent_box;
+    QHash<QString,Adherent*> adherents;
+    AdherentView* adherent_view;
+    bool updating_adherents;
 signals:
 
 };

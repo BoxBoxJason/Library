@@ -10,11 +10,20 @@ Adherent::Adherent(const QString& nom,const QString& prenom, const QString& adre
     Adherent::liste.insert(this);
 }
 
+QString Adherent::getFullname(){
+    return nom.toUpper() + " " + prenom;
+}
+
 
 Adherent::~Adherent(){
     for (Livre* livre : livres){
         livre->setDisponibilite(true);
     }
+}
+
+
+void Adherent::setBibliotheque(Bibliotheque* biblio){
+    bibliotheque = biblio;
 }
 
 
@@ -33,6 +42,15 @@ bool Adherent::emprunterLivre(int code) {
 void Adherent::rendreLivre(Livre* livre){
     livre->setDisponibilite(true);
     livres.remove(livre);
+}
+
+
+QSet<Adherent*> Adherent::getAdherents(){
+    QSet<Adherent*> result;
+    for(Adherent* ad : Adherent::liste){
+        result.insert(ad);
+    }
+    return result;
 }
 
 

@@ -28,6 +28,7 @@ public:
      */
     static Livre* getExemplaireFromCode(int code);
     static Livre* getLivreFromISBN(long long isbn);
+    static QSet<Livre*> getLivres();
     static QSet<Livre*> getExemplairesFromISBN(long long isbn);
     static QSet<Livre*> getLivresFromAuteurSubstring(const QString& auteur_substring);
     static QSet<Livre*> getLivresFromTitreSubstring(const QString& titre_substring);
@@ -41,7 +42,7 @@ public:
         infos.append("Livre: " + titre);
         infos.append("Auteur: " + auteur);
         infos.append("Code: " + QString::number(code));
-        infos.append("ISBN" + QString::number(isbn));
+        infos.append("ISBN: " + QString::number(isbn));
         infos.append("Disponible: " + QString(disponibilite ? "oui" : "non"));
         return infos;
     };
@@ -70,10 +71,10 @@ protected:
 
     // Compteur d'instances, sert à attribuer un nouveau code unique à chaque livre
     static int compteur;
-    // Hashmap de tous les codes:livres existant
-    static QHash<long long,Livre*> liste;
-    // Renvoie la hashmap des codes:livres
-    static QHash<long long,Livre*>* getListe(){return &Livre::liste;}
+    // Hashmap de tous les codes:livres physiques existants
+    static QHash<long long,Livre*> liste_physique;
+    // Hashmap de tous les codes:livres théoriques existants
+    static QSet<Livre*> liste_theorique;
 
 };
 

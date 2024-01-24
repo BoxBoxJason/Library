@@ -2,7 +2,10 @@
 #define BOOKWIDGET_H
 
 #include <QWidget>
-#include <QTextBrowser>
+#include <QStackedLayout>
+#include <QHash>
+#include <QComboBox>
+#include "bookview.h"
 #include "../../librairie/livre.h"
 
 class BookWidget : public QWidget
@@ -14,8 +17,12 @@ public:
     void clean();
 
 private:
-    Livre* livre;
-    QTextBrowser* affichage;
+    QStackedLayout* stacked_layout;
+    QComboBox* choix_livre_box;
+    QHash<QString,Livre*> livres;
+    BookView* book_view;
+    bool updating_livres;
+
 signals:
 
 };

@@ -3,28 +3,41 @@
 #include "adherentwidget.h"
 
 AdherentWidget::AdherentWidget(QWidget *parent)
-    : QWidget{parent}
+    : QWidget{parent}, adherents(), updating_adherents(false)
 {
-    QVBoxLayout layout(this);
-    QLabel header_label("Profile Adhérent",this);
-    layout.addWidget(&header_label,0,Qt::AlignmentFlag::AlignHCenter | Qt::AlignmentFlag::AlignTop);
+    stacked_layout = new QStackedLayout(this);
 
-    QTextBrowser affichage_widget;
-    affichage = &affichage_widget;
-    layout.addWidget(&affichage_widget,0,Qt::AlignmentFlag::AlignCenter);
-}
+    // Choix bilbio
+    QWidget* choix_adherent = new QWidget(this);
+    QVBoxLayout* choix_adherent_layout = new QVBoxLayout(choix_adherent);
+    choix_adherent_layout->addWidget(new QLabel("Choix de l'adhérent"),0,Qt::AlignmentFlag::AlignTop | Qt::AlignmentFlag::AlignHCenter);
 
-void AdherentWidget::updateDisplay(Adherent *adherent){
-    this->adherent = adherent;
-    if (adherent != nullptr){
-        affichage->setText(adherent->getInformations().join("\n"));
-    }
-    else {
-        clean();
-    }
+        choix_adherent_box = new QComboBox(choix_adherent);
+    connect(choix_adherent_box, &QComboBox::currentTextChanged, this, [=](const QString& text) {
+        if(! (text.isEmpty()  || updating_adherents) ){
+            adherent_view->updateDisplay(adherents.value(text));
+            stacked_layout->setCurrentIndex(1);
+        }
+    });
+    choix_adherent_layout->addWidget(choix_adherent_box,0,Qt::AlignmentFlag::AlignCenter);
+
+    stacked_layout->addWidget(choix_adherent);
+
+    adherent_view = new AdherentView(this);
+    stacked_layout->addWidget(adherent_view);
+
+    setLayout(stacked_layout);
 }
 
 
 void AdherentWidget::clean(){
-    affichage->setText("");
+    updating_adherents = true;
+    choix_adherent_box->clear();
+    adherents.clear();
+    for (Adherent *ad : Adherent::getAdherents()){
+        choix_adherent_box->addItem(ad->getFullname());
+        adherents.insert(ad->getFullname(),ad);
+    }
+    updating_adherents = false;
+    stacked_layout->setCurrentIndex(0);
 }

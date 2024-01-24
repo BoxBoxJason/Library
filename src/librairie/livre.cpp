@@ -2,17 +2,19 @@
 
 
 int Livre::compteur = 0;
-QHash<long long,Livre*> Livre::liste;
+QHash<long long,Livre*> Livre::liste_physique;
+QSet<Livre*> Livre::liste_theorique;
 
 
 Livre::Livre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible, int code_bibliotheque)
     : auteur(auteur), titre(titre),editeur(editeur), isbn(isbn), public_cible(public_cible), code_bibliotheque_origine(code_bibliotheque){
     if (code_bibliotheque > -1){
         code = compteur++;
-        getListe()->insert(code,this);
+        liste_physique.insert(code,this);
     }
     else {
         code = -1;
+        liste_theorique.insert(this);
     }
 }
 
@@ -26,13 +28,12 @@ int Livre::getISBN(){return isbn;}
 QString Livre::getPublicCible(){return public_cible;}
 bool Livre::getDisponibilite(){return disponibilite;}
 
-Livre* Livre::getExemplaireFromCode(int code){return liste.value(code,nullptr);}
-
+Livre* Livre::getExemplaireFromCode(int code){return Livre::liste_physique.value(code,nullptr);}
 
 Livre* Livre::getLivreFromISBN(long long isbn){
     Livre* result = nullptr;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine < 0 && livre->isbn == isbn){
+    for (Livre* livre : Livre::liste_theorique){
+        if (livre->isbn == isbn){
             result = livre;
             break;
         }
@@ -40,10 +41,22 @@ Livre* Livre::getLivreFromISBN(long long isbn){
     return result;
 }
 
+
+QSet<Livre*> Livre::getLivres(){
+    QSet<Livre*> result;
+    for(Livre* livre : Livre::liste_theorique){
+        if(livre->code_bibliotheque_origine == -1){
+            result.insert(livre);
+        }
+    }
+    return result;
+}
+
+
 QSet<Livre*> Livre::getExemplairesFromISBN(long long isbn){
     QSet<Livre*> result;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine > -1 && livre->isbn == isbn){
+    for (Livre* livre : Livre::liste_physique){
+        if (livre->isbn == isbn){
             result.insert(livre);
         }
     }
@@ -53,8 +66,8 @@ QSet<Livre*> Livre::getExemplairesFromISBN(long long isbn){
 
 QSet<Livre*> Livre::getLivresFromAuteurSubstring(const QString& auteur_substring){
     QSet<Livre*> result;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine < 0 && livre->auteur.contains(auteur_substring)){
+    for (Livre* livre : Livre::liste_theorique){
+        if (livre->auteur.contains(auteur_substring)){
             result.insert(livre);
         }
     }
@@ -64,8 +77,8 @@ QSet<Livre*> Livre::getLivresFromAuteurSubstring(const QString& auteur_substring
 
 QSet<Livre*> Livre::getLivresFromTitreSubstring(const QString& titre_substring){
     QSet<Livre*> result;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine < 0 && livre->titre.contains(titre_substring)){
+    for (Livre* livre : Livre::liste_theorique){
+        if (livre->titre.contains(titre_substring)){
             result.insert(livre);
         }
     }
@@ -75,8 +88,8 @@ QSet<Livre*> Livre::getLivresFromTitreSubstring(const QString& titre_substring){
 
 QSet<Livre*> Livre::getLivresFromEditeurSubstring(const QString& editeur_substring){
     QSet<Livre*> result;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine < 0 && livre->editeur.contains(editeur_substring)){
+    for (Livre* livre : Livre::liste_theorique){
+        if (livre->editeur.contains(editeur_substring)){
             result.insert(livre);
         }
     }
@@ -86,8 +99,8 @@ QSet<Livre*> Livre::getLivresFromEditeurSubstring(const QString& editeur_substri
 
 QSet<Livre*> Livre::getLivresFromPublicCible(const QString& public_cible){
     QSet<Livre*> result;
-    for (Livre* livre : Livre::liste){
-        if (livre->code_bibliotheque_origine < 0 && livre->public_cible== public_cible){
+    for (Livre* livre : Livre::liste_theorique){
+        if (livre->public_cible== public_cible){
             result.insert(livre);
         }
     }
