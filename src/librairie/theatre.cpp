@@ -4,7 +4,7 @@
 QHash<int,Theatre*> Theatre::liste;
 
 
-Theatre::Theatre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,int siecle,int code_bibliotheque_origine)
+Theatre::Theatre(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,int siecle,int code_bibliotheque_origine)
     : Livre{auteur,titre,editeur,isbn,public_cible,code_bibliotheque_origine} , siecle(siecle)
 {
 

@@ -2,7 +2,7 @@
 
 QHash<int,BD*> BD::liste;
 
-BD::BD(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& dessinateur,int code_bibliotheque_origine)
+BD::BD(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,const QString& dessinateur,int code_bibliotheque_origine)
     : Livre{auteur,titre,editeur,isbn,public_cible,code_bibliotheque_origine} , dessinateur(dessinateur) {
 
 }

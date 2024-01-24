@@ -2,12 +2,13 @@
 
 
 int Livre::compteur = 0;
-QHash<long long,Livre*> Livre::liste_physique;
+QHash<int,Livre*> Livre::liste_physique;
 QSet<Livre*> Livre::liste_theorique;
 
 
-Livre::Livre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible, int code_bibliotheque)
+Livre::Livre(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible, int code_bibliotheque)
     : auteur(auteur), titre(titre),editeur(editeur), isbn(isbn), public_cible(public_cible), code_bibliotheque_origine(code_bibliotheque){
+    disponibilite = code_bibliotheque > -1;
     if (code_bibliotheque > -1){
         code = compteur++;
         liste_physique.insert(code,this);
@@ -24,13 +25,14 @@ int Livre::getCode(){return code;}
 QString Livre::getAuteur(){return auteur;}
 QString Livre::getTitre(){return titre;}
 QString Livre::getEditeur(){return editeur;}
-int Livre::getISBN(){return isbn;}
+QString Livre::getISBN(){return isbn;}
 QString Livre::getPublicCible(){return public_cible;}
 bool Livre::getDisponibilite(){return disponibilite;}
+int Livre::getCodeBibliothequeOrigine(){return code_bibliotheque_origine;}
 
 Livre* Livre::getExemplaireFromCode(int code){return Livre::liste_physique.value(code,nullptr);}
 
-Livre* Livre::getLivreFromISBN(long long isbn){
+Livre* Livre::getLivreFromISBN(QString isbn){
     Livre* result = nullptr;
     for (Livre* livre : Livre::liste_theorique){
         if (livre->isbn == isbn){
@@ -53,7 +55,7 @@ QSet<Livre*> Livre::getLivres(){
 }
 
 
-QSet<Livre*> Livre::getExemplairesFromISBN(long long isbn){
+QSet<Livre*> Livre::getExemplairesFromISBN(QString isbn){
     QSet<Livre*> result;
     for (Livre* livre : Livre::liste_physique){
         if (livre->isbn == isbn){

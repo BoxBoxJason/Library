@@ -40,6 +40,7 @@ public:
      * \return
      */
     static QSet<Adherent*> getAdherents();
+    QSet<Livre*> getLivresEmpruntes();
     /*!
      * \brief getInformations
      * \return Renvoie les informations du profil de l'adhérent (pour affichage)

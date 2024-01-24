@@ -28,7 +28,8 @@ public:
      * \param isbn Code ISBN du livre.
      * \return Pointeur vers le livre.
      */
-    Livre* emprunterLivre(Bibliotheque* bibliotheque, long long isbn);
+    Livre* emprunterLivre(Bibliotheque* bibliotheque, QString isbn);
+    void rendreLivre(Livre* livre);
     /*!
      * \brief setNom Change l'attribut nom de la bibliothèque.
      * Attention, rien ne se passe si on essaie de donner un nom qui existe déjà.
@@ -48,12 +49,13 @@ public:
      * \param isbn
      * \return
      */    
-    bool acheterLivre(long long isbn);
+    bool acheterLivre(QString isbn);
     /*!
      * \brief getNom
      * \return Renvoie le nom de la bibliothèque
      */
     QString getNom();
+    QSet<Livre*> getLivresEmpruntes();
     /*!
      * \brief getInformations
      * \return Renvoie les informations de la bibliothèque sous forme de liste
@@ -81,12 +83,13 @@ private:
     int code;
     // Hashmap des codes:livres de la bibliothèque (contient aussi ceux prêtés à adhérents).
     QHash<int,Livre*> livres;
+    QSet<Livre*> livres_empruntes;
     /*!
      * \brief getExemplairesFromISBN Renvoie tous les exemplaires associés à l'isbn par un livre.
      * \param isbn
      * \return Set des exemplaires correspond à l'isbn d'un livre.
      */
-    QSet<Livre*> getExemplairesFromISBN(long long isbn);
+    QSet<Livre*> getExemplairesFromISBN(QString isbn);
     // Compteur d'instances, utilisé pour attribuer un code unique à une bibliothèque.
     static int compteur;
     // Hashmap des codes:Bibliothèques existantes.

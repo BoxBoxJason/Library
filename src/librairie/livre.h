@@ -10,14 +10,15 @@
 class Livre
 {
 public:
-    explicit Livre(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible, int code_bibliotheque=-1);
+    explicit Livre(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible, int code_bibliotheque=-1);
 
     int getCode();
     QString getAuteur();
     QString getTitre();
     QString getEditeur();
-    int getISBN();
+    QString getISBN();
     QString getPublicCible();
+    int getCodeBibliothequeOrigine();
     bool getDisponibilite();
     void setDisponibilite(bool disponibilite);
     /*!
@@ -27,9 +28,9 @@ public:
      * \return Pointeur vers le livre demandé.
      */
     static Livre* getExemplaireFromCode(int code);
-    static Livre* getLivreFromISBN(long long isbn);
+    static Livre* getLivreFromISBN(QString isbn);
     static QSet<Livre*> getLivres();
-    static QSet<Livre*> getExemplairesFromISBN(long long isbn);
+    static QSet<Livre*> getExemplairesFromISBN(QString isbn);
     static QSet<Livre*> getLivresFromAuteurSubstring(const QString& auteur_substring);
     static QSet<Livre*> getLivresFromTitreSubstring(const QString& titre_substring);
     static QSet<Livre*> getLivresFromEditeurSubstring(const QString& editeur_substring);
@@ -41,9 +42,14 @@ public:
         QStringList infos;
         infos.append("Livre: " + titre);
         infos.append("Auteur: " + auteur);
-        infos.append("Code: " + QString::number(code));
-        infos.append("ISBN: " + QString::number(isbn));
-        infos.append("Disponible: " + QString(disponibilite ? "oui" : "non"));
+        infos.append("ISBN: " + isbn);
+        if(code > -1){
+            infos.append("Code: " + QString::number(code));
+            infos.append("Disponible: " + QString(disponibilite ? "oui" : "non"));
+        }
+        else {
+            infos.append("EXEMPLAIRE IMMATÉRIEL");
+        }
         return infos;
     };
     friend std::ostream& operator<<(std::ostream& os, const Livre& obj) {
@@ -61,7 +67,7 @@ protected:
     // Éditeur du livre
     QString editeur;
     // Numéro isbn du livre
-    long long isbn;
+    QString isbn;
     // Public ciblé: adulte, ado, jeunesse, tout public
     QString public_cible;
     // Disponibilité dans sa bibliothèque
@@ -72,7 +78,7 @@ protected:
     // Compteur d'instances, sert à attribuer un nouveau code unique à chaque livre
     static int compteur;
     // Hashmap de tous les codes:livres physiques existants
-    static QHash<long long,Livre*> liste_physique;
+    static QHash<int,Livre*> liste_physique;
     // Hashmap de tous les codes:livres théoriques existants
     static QSet<Livre*> liste_theorique;
 

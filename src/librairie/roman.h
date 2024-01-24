@@ -6,7 +6,7 @@
 class Roman : public Livre
 {
 public:
-    Roman(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& genre,int code_bibliotheque_origine=-1);
+    Roman(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,const QString& genre,int code_bibliotheque_origine=-1);
 
     QString getGenre();
 

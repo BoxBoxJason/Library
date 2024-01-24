@@ -2,7 +2,7 @@
 
 QHash<int,Album*> Album::liste;
 
-Album::Album(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& illustrations,int code_bibliotheque_origine)
+Album::Album(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,const QString& illustrations,int code_bibliotheque_origine)
     : Livre{auteur,titre,editeur,isbn,public_cible,code_bibliotheque_origine} , illustrations(illustrations){
 
 }

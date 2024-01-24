@@ -39,6 +39,15 @@ bool Adherent::emprunterLivre(int code) {
 }
 
 
+QSet<Livre*> Adherent::getLivresEmpruntes(){
+    QSet<Livre*> result;
+    for(Livre* livre : livres){
+        result.insert(livre);
+    }
+    return result;
+}
+
+
 void Adherent::rendreLivre(Livre* livre){
     livre->setDisponibilite(true);
     livres.remove(livre);

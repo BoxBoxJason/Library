@@ -2,7 +2,7 @@
 
 QHash<int,Recueil*> Recueil::liste;
 
-Recueil::Recueil(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& indicateur,int code_bibliotheque_origine)
+Recueil::Recueil(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,const QString& indicateur,int code_bibliotheque_origine)
     : Livre{auteur,titre,editeur,isbn,public_cible,code_bibliotheque_origine}, indicateur(indicateur) {
 
 }

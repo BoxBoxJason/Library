@@ -3,7 +3,7 @@
 
 QHash<int,Roman*> Roman::liste;
 
-Roman::Roman(const QString& auteur, const QString& titre, const QString& editeur, long long isbn, const QString& public_cible,const QString& genre,int code_bibliotheque_origine)
+Roman::Roman(const QString& auteur, const QString& titre, const QString& editeur, QString isbn, const QString& public_cible,const QString& genre,int code_bibliotheque_origine)
     : Livre{auteur,titre,editeur,isbn,public_cible,code_bibliotheque_origine} , genre(genre)
 {
 

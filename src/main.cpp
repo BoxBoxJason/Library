@@ -35,31 +35,81 @@ int main(int argc, char *argv[]) {
     adhe8.setBibliotheque(&b3);
     adhe9.setBibliotheque(&b4);
 
-    Roman roman1("Fiodor Dostoïevski","Les Frères Karamazov","GALLIMARD",9788437606385,"adulte","Fiction philosophique",-1);
-    Roman roman2("Homere","Odyssée","GALLIMARD",9782081258594,"adulte","Mythes & épopée",-1);
+    Roman roman1("Fiodor Dostoïevski","Les Frères Karamazov","GALLIMARD","9788437606385","adulte","Fiction philosophique",-1);
+    Roman roman2("Homere","Odyssée","GALLIMARD","9782081258594","adulte","Mythes & épopée",-1);
 
 
-    Theatre theatre1("Henry Bauchau","Antigone"," Actes Sud",9782290310083,"adulte",20,-1);
-    Theatre theatre2("Jean Racine","Phèdre","Gallimard",9782070466665,"adulte",17,-1);
+    Theatre theatre1("Henry Bauchau","Antigone"," Actes Sud","9782290310083","adulte",20,-1);
+    Theatre theatre2("Jean Racine","Phèdre","Gallimard","9782070466665","adulte",17,-1);
 
-    BD bd1("René Goscinny","Astérix - L Iris blanc","Albert Rene",9782014001334,"Tout Public","Didier Conrad",-1);
-    BD bd2("Delaf","Gaston - Le retour de Lagaffe","Dupuis",9791034752065,"Tout Public","Delaf",-1);
+    BD bd1("René Goscinny","Astérix - L Iris blanc","Albert Rene","9782014001334","Tout Public","Didier Conrad",-1);
+    BD bd2("Delaf","Gaston - Le retour de Lagaffe","Dupuis","9791034752065","Tout Public","Delaf",-1);
 
-    Album album1("Nadja","Chien Bleu","L`Ecole des loisirs",9782211066563,"Enfant","dessin",-1);
-    Album album2("Tomi Ungerer","OTTO","L`Ecole des loisirs",9782211061988,"Jeunesse","dessin",-1);
+    Album album1("Nadja","Chien Bleu","L`Ecole des loisirs","9782211066563","Enfant","dessin",-1);
+    Album album2("Tomi Ungerer","OTTO","L`Ecole des loisirs","9782211061988","Jeunesse","dessin",-1);
 
-    Recueil recueil1("Charles Baudelaire","Les Fleurs du mal","Auguste Poulet-Malassis",9780192829726,"Tout Public","vers",-1) ;
-    Recueil recueil2("Victor Hugo","Les Contemplations"," Editions Flammarion",9782253014997,"Tout Public","vers",-1);
+    Recueil recueil1("Charles Baudelaire","Les Fleurs du mal","Auguste Poulet-Malassis","9780192829726","Tout Public","vers",-1) ;
+    Recueil recueil2("Victor Hugo","Les Contemplations"," Editions Flammarion","9782253014997","Tout Public","vers",-1);
 
-    std::cout << roman1;
+    // Achat livre bibliotheque
+    b0.acheterLivre("9788437606385");
+    std::cout << "Livres de b0 avant emprunt:\n";
+    for(Livre* livre : b0.obtenirLivres()){
+        std::cout << *livre << "\n";
+    }
 
+    // Emprunt livre par adhérent
+    adhe1.emprunterLivre(0);
+    std::cout << "Livres de b0 après emprunt:\n";
+    for(Livre* livre : b0.obtenirLivres()){
+        std::cout << *livre << "\n";
+    }
+    std::cout << "Livres empruntés par adhe1:\n";
+    for (Livre* livre : adhe1.getLivresEmpruntes()){
+        std::cout << *livre << "\n";
+        adhe1.rendreLivre(livre);
+    }
 
+    std::cout << "Livres de b0 après restitution:\n";
+        for(Livre* livre : b0.obtenirLivres()){
+        std::cout << *livre << "\n";
+    }
+
+    // Emprunt livre entre bibliothèque
+    b1.emprunterLivre(&b0,"9788437606385");
+    std::cout << "Livres de b0 après emprunt biblio:\n";
+        for(Livre* livre : b0.obtenirLivres()){
+        std::cout << *livre << "\n";
+    }
+
+    std::cout << "Livres de b1 après emprunt biblio:\n";
+        for(Livre* livre : b1.obtenirLivres()){
+    std::cout << *livre << "\n";
+    }
+
+    for(Livre* livre : b1.getLivresEmpruntes()){
+        b1.rendreLivre(livre);
+    }
+
+    std::cout << "Livres de b1 après rendu biblio:\n";
+        for(Livre* livre : b1.obtenirLivres()){
+        std::cout << *livre << "\n";
+    }
+
+    std::cout << "Livres de b0 après rendu biblio:\n";
+        for(Livre* livre : b0.obtenirLivres()){
+    std::cout << *livre << "\n";
+    }
+
+/*
     QApplication a(argc, argv);
 
     Library mainWindow;
     mainWindow.show();
 
     return a.exec();
+*/
+    return 0;
 }
 
 /*
